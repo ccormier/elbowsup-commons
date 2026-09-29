@@ -660,7 +660,7 @@ fun BaseSimpleActivity.launchCallIntent(recipient: String, handle: PhoneAccountH
             }
 
             if (isDefaultDialer()) {
-                val packageName = if (baseConfig.appId.contains(".debug", true)) "org.fossify.phone.debug" else "org.fossify.phone"
+                // elbowsup: target the real (renamed) app package, not org.fossify.phone
                 val className = "org.fossify.phone.activities.DialerActivity"
                 setClassName(packageName, className)
             }
