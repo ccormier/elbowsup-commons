@@ -72,7 +72,6 @@ import org.fossify.commons.helpers.REAL_FILE_PATH
 import org.fossify.commons.helpers.REQUEST_EDIT_IMAGE
 import org.fossify.commons.helpers.REQUEST_SET_AS
 import org.fossify.commons.helpers.SIDELOADING_FALSE
-import org.fossify.commons.helpers.SIDELOADING_TRUE
 import org.fossify.commons.helpers.SILENT
 import org.fossify.commons.helpers.ensureBackgroundThread
 import org.fossify.commons.helpers.isOnMainThread
@@ -1753,33 +1752,10 @@ fun BaseSimpleActivity.getAlarmSounds(type: Int, callback: (ArrayList<AlarmSound
     }
 }
 
-fun BaseSimpleActivity.showModdedAppWarning() {
-    val label =
-        "You are using a fake version of the app. For your own safety " +
-                "download the original one from www.fossify.org. Thanks"
-    ConfirmationDialog(
-        activity = this,
-        message = label,
-        positive = R.string.ok,
-        negative = 0
-    ) {
-        launchViewIntent(DEVELOPER_PLAY_STORE_URL)
-    }
-}
-
 fun Activity.checkAppSideloading(): Boolean {
-    val isSideloaded = when (baseConfig.appSideloadingStatus) {
-        SIDELOADING_TRUE -> true
-        SIDELOADING_FALSE -> false
-        else -> isAppSideloaded()
-    }
-
-    baseConfig.appSideloadingStatus = if (isSideloaded) SIDELOADING_TRUE else SIDELOADING_FALSE
-    if (isSideloaded) {
-        showSideloadingDialog()
-    }
-
-    return isSideloaded
+    // elbowsup: anti-tamper check removed; our fork is never treated as sideloaded
+    baseConfig.appSideloadingStatus = SIDELOADING_FALSE
+    return false
 }
 
 fun Activity.isAppSideloaded(): Boolean {
