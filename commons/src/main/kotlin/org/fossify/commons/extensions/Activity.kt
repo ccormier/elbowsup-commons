@@ -106,14 +106,15 @@ fun Activity.appLaunched(appId: String) {
                 toggleAppIconColor(appId, index, color, false)
             }
 
-            val defaultClassName = "${baseConfig.appId.removeSuffix(".debug")}.activities.SplashActivity"
+            // elbowsup: alias classes are namespace-qualified, not app-id-qualified
+            val defaultClassName = "org.fossify.phone.activities.SplashActivity"
             packageManager.setComponentEnabledSetting(
                 ComponentName(baseConfig.appId, defaultClassName),
                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
                 PackageManager.DONT_KILL_APP
             )
 
-            val orangeClassName = "${baseConfig.appId.removeSuffix(".debug")}.activities.SplashActivity.Green"
+            val orangeClassName = "org.fossify.phone.activities.SplashActivity.Green"
             packageManager.setComponentEnabledSetting(
                 ComponentName(baseConfig.appId, orangeClassName),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,

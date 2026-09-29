@@ -5,14 +5,14 @@ Elbows Up dialer. It removes the anti-tamper checks and fixes hard-coded
 `org.fossify.*` assumptions that break renamed forks.
 
 - **Base:** upstream tag `6.1.6`
-- **Published as:** `org.fossify:commons:6.1.6-elbowsup1` (via mavenLocal)
+- **Published as:** `org.fossify:commons:6.1.6-elbowsup2` (via mavenLocal)
 - **Upstream:** https://github.com/FossifyOrg/Commons (remote `upstream`)
 
 ## Publish
 
 ```bash
 printf 'sdk.dir=/path/to/android-sdk\n' > local.properties
-./gradlew :commons:publishToMavenLocal -PVERSION=6.1.6-elbowsup1
+./gradlew :commons:publishToMavenLocal -PVERSION=6.1.6-elbowsup2
 ```
 
 ## Patches (re-apply on every new upstream tag)
@@ -29,6 +29,8 @@ printf 'sdk.dir=/path/to/android-sdk\n' > local.properties
 7. `helpers/MyContactsContentProvider.kt` — drop the caller-package allowlist
 8. `activities/ManageBlockedNumbersActivity.kt` — recognise `com.keejii.elbowsup`
 9. `extensions/Context.kt` — `isDefaultDialer()` uses the real role check
+10. `extensions/Context-styling.kt`, `extensions/Activity.kt`, `compose/extensions/ActivityExtensions.kt` — icon-colour alias class names are namespace-qualified (`org.fossify.phone.activities.SplashActivity…`), never derived from the app id; `ComponentName` still uses the runtime package
+11. `samples/src/main/kotlin/.../MainActivity.kt` — use a literal where the deleted `FAKE_VERSION_APP_LABEL` was, so the samples module still compiles
 
 ## Rebasing onto a new upstream Commons tag
 
@@ -40,3 +42,7 @@ git push --force-with-lease origin main
 ```
 
 Then bump the `commons` pin in the app's `gradle/libs.versions.toml`.
+
+After rebuilding the app, confirm patch 10 still holds: the merged manifest must declare
+`org.fossify.phone.activities.SplashActivity.<Color>` aliases, and Commons must address them by
+those namespace-qualified names (never `appId + ".activities.SplashActivity…"`).

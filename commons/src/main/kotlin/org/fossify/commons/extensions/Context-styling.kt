@@ -269,7 +269,8 @@ fun Context.checkAppIconColor() {
 }
 
 fun Context.toggleAppIconColor(appId: String, colorIndex: Int, color: Int, enable: Boolean) {
-    val className = "${appId.removeSuffix(".debug")}.activities.SplashActivity${appIconColorStrings[colorIndex]}"
+    // elbowsup: alias classes are namespace-qualified, not app-id-qualified
+    val className = "org.fossify.phone.activities.SplashActivity${appIconColorStrings[colorIndex]}"
     val state = if (enable) COMPONENT_ENABLED_STATE_ENABLED else COMPONENT_ENABLED_STATE_DISABLED
     try {
         packageManager.setComponentEnabledSetting(ComponentName(appId, className), state, PackageManager.DONT_KILL_APP)

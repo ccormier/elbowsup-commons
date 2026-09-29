@@ -10,7 +10,6 @@ import org.fossify.commons.activities.ManageBlockedNumbersActivity
 import org.fossify.commons.compose.alert_dialog.AlertDialogState
 import org.fossify.commons.compose.alert_dialog.rememberAlertDialogState
 import org.fossify.commons.compose.extensions.DEVELOPER_PLAY_STORE_URL
-import org.fossify.commons.compose.extensions.FAKE_VERSION_APP_LABEL
 import org.fossify.commons.compose.extensions.appLaunchedCompose
 import org.fossify.commons.compose.extensions.enableEdgeToEdgeSimple
 import org.fossify.commons.compose.extensions.onEventValue
@@ -47,7 +46,7 @@ class MainActivity : BaseSimpleActivity() {
                     openTestButton = {
                         ConfirmationDialog(
                             this@MainActivity,
-                            FAKE_VERSION_APP_LABEL,
+                            "Sample confirmation dialog",
                             positive = org.fossify.commons.R.string.ok,
                             negative = 0
                         ) {

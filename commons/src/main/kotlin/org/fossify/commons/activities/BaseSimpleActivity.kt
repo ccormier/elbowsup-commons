@@ -87,7 +87,6 @@ import org.fossify.commons.extensions.isShowingSAFDialog
 import org.fossify.commons.extensions.isShowingSAFDialogSdk30
 import org.fossify.commons.extensions.openDeviceSettings
 import org.fossify.commons.extensions.openNotificationSettings
-import org.fossify.commons.extensions.random
 import org.fossify.commons.extensions.showErrorToast
 import org.fossify.commons.extensions.storeAndroidTreeUri
 import org.fossify.commons.extensions.toast

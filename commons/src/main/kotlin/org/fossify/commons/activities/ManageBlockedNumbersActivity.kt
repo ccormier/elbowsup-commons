@@ -223,7 +223,9 @@ class ManageBlockedNumbersActivity : BaseSimpleActivity() {
     }
 
     private fun maybeSetDefaultCallerIdApp() {
-        if (isQPlus() && (baseConfig.appId.startsWith("org.fossify.phone") || baseConfig.appId.startsWith("com.keejii.elbowsup"))) {
+        val isPhoneFork = baseConfig.appId.startsWith("org.fossify.phone") ||
+            baseConfig.appId.startsWith("com.keejii.elbowsup")
+        if (isQPlus() && isPhoneFork) {
             setDefaultCallerIdApp()
         }
     }

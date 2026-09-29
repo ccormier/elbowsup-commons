@@ -2,7 +2,6 @@ package org.fossify.commons.compose.extensions
 
 import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
 import android.content.pm.PackageManager
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -19,7 +18,6 @@ import org.fossify.commons.extensions.isAProApp
 import org.fossify.commons.extensions.isAppInstalledOnSDCard
 import org.fossify.commons.extensions.isOrWasThankYouInstalled
 import org.fossify.commons.extensions.launchViewIntent
-import org.fossify.commons.extensions.random
 import org.fossify.commons.extensions.toggleAppIconColor
 import org.fossify.commons.extensions.updateSDCardPath
 import org.fossify.commons.helpers.isOreoMr1Plus
@@ -44,14 +42,15 @@ fun ComponentActivity.appLaunchedCompose(
                 toggleAppIconColor(appId, index, color, false)
             }
 
-            val defaultClassName = "${baseConfig.appId.removeSuffix(".debug")}.activities.SplashActivity"
+            // elbowsup: alias classes are namespace-qualified, not app-id-qualified
+            val defaultClassName = "org.fossify.phone.activities.SplashActivity"
             packageManager.setComponentEnabledSetting(
                 ComponentName(baseConfig.appId, defaultClassName),
                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
                 PackageManager.DONT_KILL_APP
             )
 
-            val greenClassName = "${baseConfig.appId.removeSuffix(".debug")}.activities.SplashActivity.Green"
+            val greenClassName = "org.fossify.phone.activities.SplashActivity.Green"
             packageManager.setComponentEnabledSetting(
                 ComponentName(baseConfig.appId, greenClassName),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
