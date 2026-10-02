@@ -6,6 +6,7 @@ Elbows Up dialer. It removes the anti-tamper checks and fixes hard-coded
 
 - **Base:** upstream tag `6.1.6`
 - **Published as:** `org.fossify:commons:6.1.6-elbowsup2` (via mavenLocal)
+- **JitPack:** `com.github.ccormier:elbowsup-commons:6.1.6-elbowsup2` (the dialer depends on this)
 - **Upstream:** https://github.com/FossifyOrg/Commons (remote `upstream`)
 
 ## Publish
@@ -14,6 +15,17 @@ Elbows Up dialer. It removes the anti-tamper checks and fixes hard-coded
 printf 'sdk.dir=/path/to/android-sdk\n' > local.properties
 ./gradlew :commons:publishToMavenLocal -PVERSION=6.1.6-elbowsup2
 ```
+
+## Publish to JitPack
+
+The dialer resolves the patched Commons from JitPack, not Maven Central. Tag the commit the dialer
+pins and push the tag; JitPack builds it on demand:
+
+1. `git tag <tag> && git push origin <tag>` (for example `6.1.6-elbowsup2`).
+2. Request any artifact URL to trigger the build, then wait for
+   `https://jitpack.io/api/builds/com.github.ccormier/elbowsup-commons/<tag>` to report `"status": "ok"`.
+3. Confirm `https://jitpack.io/com/github/ccormier/elbowsup-commons/<tag>/elbowsup-commons-<tag>.pom`
+   returns 200 before tagging the dialer release.
 
 ## Patches (re-apply on every new upstream tag)
 
